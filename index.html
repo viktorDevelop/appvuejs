@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue js</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+	
+	 <div id="app">
+	 	<div class=" container  ">
+	 		<header><h1>{{title}} </h1> колличество записей {{lengthItemTask()}}</header>
+			 
+			<form   class="form">
+				<div class="input-group mb-3">
+					<input type="text" id="itemform" v-model="task" class="form-control" placeholder="add task">
+					<div class="input-grop-append">
+						<button type="button" class="btn btn-outline-secondary" v-on:click = "addItem">add</button>
+					</div>
+				</div>
+			</form>
+	 		
+
+	 	<table class="table table-striped table-dark">
+	 		<thead>
+	 			<tr>
+	 				<th scope="col">task  </th>
+	 				<th style="text-align: right;" >удалить</th>
+	 			</tr>
+	 		</thead>
+
+	 		<tbody>
+	 			<tr v-for="(item,index) in tasks">
+	 				<th scope="row">{{item.text}} </th>
+	 				<th style="text-align: right;"><button v-on:click = "deleteItem(index)" class="btn btn-danger">x</button></th>
+	 			</tr>
+	 		</tbody>
+	 	</table>
+	 </div>
+
+	  	 
+	  		
+	  	 
+			
+	  
+	</div>
+
+
+
+
+
+
+<script>
+		var app = new Vue({
+
+			el:'#app',
+
+			
+			data:{
+				title:'program task',
+				tasks:[
+					{text:"test 1"},
+					{text:"test 2"}
+				],
+				task:''
+			},
+
+			methods:{
+
+				addItem:function() {
+					 
+					 // var input = document.getElementById('itemform');
+					 // if (input.value !== "") {
+					 // 	this.tasks.push({
+					 // 		text:input.value
+					 // 	})
+
+					 // 	input.value = "";
+					 // }
+
+					 if (this.task !== "") {
+					 	this.tasks.push({text:this.task})
+					 	this.task = ""
+					 }
+				},
+
+				deleteItem:function(index){
+					this.tasks.splice(index,1);
+				},
+
+				lengthItemTask:function(){
+					return this.tasks.length;
+				}
+
+			}
+
+
+		});	 
+
+		
+</script>
+	
+</body>
+</html>
